@@ -47,8 +47,8 @@ spec:
           echo "====================="
           cat $sshpub > ./key/id_rsa.pub
           terraform init
-          terrafrom plan
-          terrafrom apply -auto-approve
+          terraform plan
+          terraform apply -auto-approve
           '''}
          }
         }
