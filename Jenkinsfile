@@ -14,7 +14,6 @@ spec:
       image: matrek/ta:latest  # Replace with the name of your Docker image
       command: ["/bin/bash", "-c"]
       args: ["sleep 1d"]  # Command to sleep for a day
-  containers:
     - name: ansible-terraform-container2
       image: eclipse-temurin:21-jdk-jammy  # Replace with the name of your Docker image
       command: ["/bin/bash", "-c"]
