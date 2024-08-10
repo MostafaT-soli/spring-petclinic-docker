@@ -32,8 +32,10 @@ spec:
     }
     stage("build environemnt on GKE") {
       steps { 
+        script {
         withCredentials([file(credentialsId: 'terrafrom-file', variable: 'terrafrom-file'),
         file(credentialsId: 'ssh-privet-key', variable: 'ssh-privet-key')])
+        }
         container('ansible-terraform-container') {
         script {sh '''
         terraform version
