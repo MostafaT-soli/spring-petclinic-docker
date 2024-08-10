@@ -23,7 +23,7 @@ cd spring-petclinic
 ./mvnw package
 java -jar target/*.jar
 ```
-
+s
 You can then access petclinic here: http://localhost:8080/
 
 <img width="625" alt="image" src="https://user-images.githubusercontent.com/313480/179161406-54a28200-d52e-411f-bfbe-463cf64b64b3.png">
