@@ -51,7 +51,7 @@ spec:
                 terraform init
                 
                 '''
-              terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance', returnStdout: true
+              terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance',  returnStatus: true, returnStdout: true
               echo "Terraform output: ${terraformOutput}"
                 // terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance
                 // terraform plan
