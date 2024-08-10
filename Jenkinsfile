@@ -7,19 +7,11 @@ kind: Pod
 metadata:
   name: ansible-terraform-pod
 spec:
+  imagePullSecrets:
+    - name: myregistrykey
   containers:
-    
     - name: ansible-terraform-container
       image: matrek/ta:latest  # Replace with the name of your Docker image
-  imagePullSecrets:
-    - name: myregistrykey
-  command: ["/bin/bash", "-c"]
-  args: ["sleep 1d"]  # Command to sleep for a day
-   
-    - name: ansible-terraform-container2
-      image: matrek/ta:latest  # Replace with the name of your Docker image
-  imagePullSecrets:
-    - name: myregistrykey
   command: ["/bin/bash", "-c"]
   args: ["sleep 1d"]  # Command to sleep for a day
     '''
