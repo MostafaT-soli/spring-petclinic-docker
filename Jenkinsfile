@@ -35,7 +35,7 @@ spec:
         script {sh '''
         terraform version
         ansible --version
-        echo "Hello"
+        echo "Hello2"
         '''
 
       }
