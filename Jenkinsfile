@@ -41,6 +41,7 @@ spec:
            file(credentialsId: 'ssh-pub', variable: 'sshpub')])
            {
           container('ansible-terraform-container') {dir('./terraform_GKE'){
+            def terraformOutput
             try{
               sh '''
                 mkdir ./key
@@ -50,7 +51,7 @@ spec:
                 terraform init
                 
                 '''
-              def terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance', returnStdout: true
+              terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance', returnStdout: true
               echo "Terraform output: ${terraformOutput}"
                 // terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance
                 // terraform plan
