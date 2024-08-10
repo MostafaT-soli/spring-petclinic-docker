@@ -54,9 +54,15 @@ spec:
                 '''
           }
             catch (Exception e) {
-                // Handle any exceptions that occur
-                echo "An exception occurred while changing the directory: " + e.getMessage()
-                error "Pipeline failed due to an exception"
+                if (e.getMessage() == "Error: Cannot import non-existent remote object") {
+                            echo "Caught a specific error message: " + e.getMessage()
+                            echo "This is Normal"
+                            // Continue the pipeline
+                        } else {
+                            // Handle any other exceptions
+                            echo "An exception occurred while changing the directory: " + e.getMessage()
+                            error "Pipeline failed due to an exception"
+                        }
                     } 
             finally {
                 // Perform cleanup or finalization steps
