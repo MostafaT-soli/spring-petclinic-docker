@@ -58,13 +58,14 @@ spec:
           }
             catch (Exception e) {
                 if (e.getMessage().contains("Error: Cannot import non-existent remote object")) {
-                           echo "----------------------------------"
-                            echo "Terraform output: ${terraformOutput}"
+                          
                             echo "Caught a specific error message: " + e.getMessage()
                             echo "This is Normal"
                             // Continue the pipeline
                         } else {
                             // Handle any other exceptions
+                            echo "----------------------------------"
+                            echo "Terraform output: ${terraformOutput}"
                             echo "An exception occurred while changing the directory: " + e.getMessage()
                             error "Pipeline failed due to an exception"
                         }
