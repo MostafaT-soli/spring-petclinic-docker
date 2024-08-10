@@ -53,7 +53,7 @@ spec:
               terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance 2>&1' ,  returnStatus: true, returnStdout: true
               echo "Terraform output: ${terraformOutput}"
               if (terraformOutput != 0 ) {
-                            echo "This is Normal"
+                            echo "This is not Normal"
                             // Continue the pipeline
                         } else {
                             // Handle any other exceptions
