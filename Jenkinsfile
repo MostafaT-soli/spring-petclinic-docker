@@ -23,9 +23,11 @@ spec:
   stages {
     stage("Git the package") {
       steps {
-        script {sh '''
-        git clone https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/MostafaT-soli/terraform_GKE.git
-        '''
+        script {
+           container('jnlp'){
+            sh '''
+              git clone https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/MostafaT-soli/terraform_GKE.git
+              '''}
         }
 
       }
@@ -44,7 +46,7 @@ spec:
           cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
           echo "====================="
           cat $sshpub > ./key/id_rsa.pub
-          terrafrom init
+          terraform init
           terrafrom plan
           terrafrom apply -auto-approve
           '''}
