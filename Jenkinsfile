@@ -44,6 +44,9 @@ spec:
           cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
           echo "====================="
           cat $sshpub > ./key/id_rsa.pub
+          sleep 9000
+          ls
+          terraform version
           terrafrom init
           terrafrom plan
           terrafrom apply -auto-approve
