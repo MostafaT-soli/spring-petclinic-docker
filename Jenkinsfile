@@ -40,16 +40,29 @@ spec:
            file(credentialsId: 'ssh-privet-key', variable: 'sshprivetkey'),
            file(credentialsId: 'ssh-pub', variable: 'sshpub')])
            {
-          container('ansible-terraform-container') {dir('./terraform_GKE')
-          {sh '''
-          mkdir ./key
-          cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
-          echo "====================="
-          cat $sshpub > ./key/id_rsa.pub
-          terraform init
-          terraform plan
-          terraform apply -auto-approve
-          '''}
+          container('ansible-terraform-container') {dir('./terraform_GKE'){
+            try{
+              sh '''
+                mkdir ./key
+                qweqweqweq
+                cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
+                echo "====================="
+                cat $sshpub > ./key/id_rsa.pub
+                terraform init
+                terraform plan
+                terraform apply -auto-approve
+                '''
+          }
+            catch (Exception e) {
+                // Handle any exceptions that occur
+                echo "An exception occurred while changing the directory: " + e.getMessage()
+                error "Pipeline failed due to an exception"
+                    } 
+            finally {
+                // Perform cleanup or finalization steps
+                echo "Finally block executed"
+            }
+          }
          }
         }
       }
