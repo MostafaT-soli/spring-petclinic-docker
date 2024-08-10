@@ -42,7 +42,6 @@ spec:
           sh '''
           mkdir ./key
           cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
-          cat terrafromfile
           echo "====================="
           cat $sshpub > ./key/id_rsa.pub
           terrafrom init
