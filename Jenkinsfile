@@ -44,7 +44,8 @@ spec:
             file(credentialsId: 'ssh-privet-key', variable: 'sshprivetkey'),
             file(credentialsId: 'ssh-pub', variable: 'sshpub')])
             {
-            container('ansible-terraform-container') {dir('./terraform_GKE'){
+            container('ansible-terraform-container') {
+              dir('./terraform_GKE'){
               def terraformOutput
               sh '''
                 mkdir ./key
@@ -60,9 +61,10 @@ spec:
                 sh 'terraform plan'
                 sh 'terraform apply -auto-approve'
                 // Continue the pipeline
-            } 
-            }
               } 
+              }
+            } 
+            
             }
          }
         }
