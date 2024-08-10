@@ -40,7 +40,7 @@ spec:
           terraform version
           ansible --version
           echo "Hello3"
-          cat  \$terrafrom-file terrafrom-file
+          cat  $terrafrom-file terrafrom-file
           cat terrafrom-file
           '''
          }
