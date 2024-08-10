@@ -45,10 +45,13 @@ spec:
           echo "Hello3"
           echo "====================="
           cat  $terrafromfile >  terrafromfile
+          cat terrafromfile
           echo "====================="
           cat $sshprivetkey > sshprivetkey
+          cat sshprivetkey
           echo "====================="
           cat $sshpub > sshpub
+          cat sshpub
           echo "====================="
           
           
