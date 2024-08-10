@@ -48,9 +48,11 @@ spec:
                 echo "====================="
                 cat $sshpub > ./key/id_rsa.pub
                 terraform init
-                terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance
+                
                 '''
-                // terraform init
+              def terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance', returnStdout: true
+              echo "Terraform output: ${terraformOutput}"
+                // terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance
                 // terraform plan
                 // terraform apply -auto-approve
           }
