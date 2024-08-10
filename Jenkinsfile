@@ -55,7 +55,7 @@ spec:
                 // terraform apply -auto-approve
           }
             catch (Exception e) {
-                if (e.getMessage() == "Error: Cannot import non-existent remote object") {
+                if (e.getMessage().contains == "Error: Cannot import non-existent remote object") {
                             echo "Caught a specific error message: " + e.getMessage()
                             echo "This is Normal"
                             // Continue the pipeline
