@@ -42,7 +42,6 @@ spec:
            {
           container('ansible-terraform-container') {dir('./terraform_GKE'){
             def terraformOutput
-            try{
               sh '''
                 mkdir ./key
                 cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
@@ -53,34 +52,25 @@ spec:
                 '''
               terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance 2>&1' ,  returnStatus: true, returnStdout: true
               echo "Terraform output: ${terraformOutput}"
-                // terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance
-                // terraform plan
-                // terraform apply -auto-approve
-          }
-            catch (Exception e) {
-                if (e.getMessage().contains("Error: Cannot import non-existent remote object")) {
+
+              if (terraformOutput != 0 ) {
                           
-                            echo "Caught a specific error message: " + e.getMessage()
+                            echo "Caught a specific error message: " + ${terraformOutput}
                             echo "This is Normal"
                             // Continue the pipeline
                         } else {
                             // Handle any other exceptions
                             echo "----------------------------------"
                             echo "Terraform output: ${terraformOutput}"
-                            echo "An exception occurred while changing the directory: " + e.getMessage()
+                            echo "An exception occurred while changing the directory: " + ${terraformOutput}
                             error "Pipeline failed due to an exception"
                         }
                     } 
-            finally {
-                // Perform cleanup or finalization steps
-                echo "Finally block executed"
-            }
           }
          }
         }
       }
     }
     
-}
 }
 }
