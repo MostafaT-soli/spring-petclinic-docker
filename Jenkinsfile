@@ -40,21 +40,14 @@ spec:
            {
           container('ansible-terraform-container') {
           sh '''
-          terraform version
-          ansible --version
-          echo "Hello3"
-          echo "====================="
-          cat  $terrafromfile >  terrafromfile
+          mkdir ./key
+          cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
           cat terrafromfile
           echo "====================="
-          cat $sshprivetkey > sshprivetkey
-          cat sshprivetkey
-          echo "====================="
-          cat $sshpub > sshpub
-          cat sshpub
-          echo "====================="
-          
-          
+          cat $sshpub > ./key/id_rsa.pub
+          terrafrom init
+          terrafrom plan
+          terrafrom apply -auto-approve
           '''
          }
         }
