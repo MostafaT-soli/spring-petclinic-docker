@@ -31,6 +31,7 @@ spec:
            container('jnlp'){
             sh '''
               git clone https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/MostafaT-soli/terraform_GKE.git
+              git clone https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/MostafaT-soli/Ansible_session.git
               '''}
         }
 
@@ -45,23 +46,26 @@ spec:
             file(credentialsId: 'ssh-pub', variable: 'sshpub')])
             {
             container('ansible-terraform-container') {
-              dir('./terraform_GKE'){
-              def terraformOutput
-              sh '''
-                mkdir ./key
-                cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
-                echo "====================="
-                cat $sshpub > ./key/id_rsa.pub
-                terraform init
-                '''
-              terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance 2>&1' ,  returnStatus: true, returnStdout: true
-              echo "Terraform output: ${terraformOutput}"
-              if (terraformOutput != 0 ) {
-                echo "There is no VM here lets create it "
-                sh 'terraform plan'
-                sh 'terraform apply -auto-approve'
-                // Continue the pipeline
-              } 
+              dir('./terraform_GKE') {
+                def terraformOutput
+                sh '''
+                  mkdir ./key
+                  cat  $terrafromfile >  ./key/crested-acrobat-430808-n2-ccb8bff2b333.json
+                  echo "====================="
+                  cat $sshpub > ./key/id_rsa.pub
+                  terraform init
+                  '''
+                terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance 2>&1' ,  returnStatus: true, returnStdout: true
+                echo "Terraform output: ${terraformOutput}"
+                if (terraformOutput != 0 ) {
+                  echo "There is no VM here lets create it "
+                  sh 'terraform plan'
+                  sh 'terraform apply -auto-approve'
+                  // Continue the pipeline
+              }
+              dir('./Ansible_session') {
+                sh 'ls -lrth'
+              }  
               }
             }
             container('java') {
