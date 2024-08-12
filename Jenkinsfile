@@ -37,6 +37,16 @@ spec:
 
       }
     }
+    stage("build the package") {
+      steps {
+        script {
+           container('java') {
+              sh './mvnw package -DskipTests '
+            }  
+        }
+
+      }
+    }
     stage("build environemnt on GKE") {
       steps { 
         script {
@@ -68,11 +78,7 @@ spec:
               }  
               }
             }
-            container('java') {
-              dir('./terraform_GKE'){
-              sh 'echo hello'
-              }
-            }  
+            
             }
          }
         }
