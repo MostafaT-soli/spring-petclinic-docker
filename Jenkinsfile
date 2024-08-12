@@ -67,6 +67,8 @@ spec:
                   '''
                 terraformOutput = sh script: 'terraform import  -input=false google_compute_instance.default projects/crested-acrobat-430808-n2/zones/us-west1-a/instances/example-instance 2>&1' ,  returnStatus: true, returnStdout: true
                 echo "Terraform output: ${terraformOutput}"
+                sh 'terraform plan'
+                sh 'terraform apply -auto-approve'
                 if (terraformOutput != 0 ) {
                   echo "There is no VM here lets create it "
                   sh 'terraform plan'
@@ -74,7 +76,11 @@ spec:
                   // Continue the pipeline
               }
               dir('./Ansible_session') {
-                sh 'ls -lrth'
+                sh '''
+                pwd 
+                ls -lrth
+
+                '''
               }  
               }
             }
