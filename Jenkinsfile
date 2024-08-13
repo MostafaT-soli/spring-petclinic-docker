@@ -37,16 +37,17 @@ spec:
 
       }
     }
-    stage("build the package") {
-      steps {
-        script {
-           container('java') {
-              sh './mvnw package -DskipTests '
-            }  
-        }
+    // stage("build the package") {
+    //   steps {
+    //     script {
+    //        container('java') {
+    //           sh './mvnw package -DskipTests '
+    //         }  
+    //     }
 
-      }
-    }
+    //   }
+    // }
+    
     stage("build environemnt on GKE") {
       steps { 
         script {
@@ -83,7 +84,8 @@ spec:
               dir('./Ansible_session') {
                 sh '''
                 echo ${VM_IP} >> hosts.ini
-                ansible-playbook -i hosts.ini --private-key $sshprivetkey -u tarekm_mvpengineer  -b install_nginx.yml
+                echo $sshprivetkey > key1.pam
+                ansible-playbook -i hosts.ini --private-key ./key1.pam -u tarekm_mvpengineer  -b install_nginx.yml
                 '''
               }  
             }
