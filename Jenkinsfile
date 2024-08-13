@@ -84,7 +84,7 @@ spec:
               dir('./Ansible_session') {
                 sh '''
                 echo ${VM_IP} >> hosts.ini
-                echo $sshprivetkey > key1.pam
+                cat $sshprivetkey > key1.pam
                 ansible-playbook -i hosts.ini --private-key ./key1.pam -u tarekm_mvpengineer  -b install_nginx.yml
                 '''
               }  
