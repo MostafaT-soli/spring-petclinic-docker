@@ -75,8 +75,8 @@ spec:
                   echo "There is no VM here lets create it "
                   sh 'terraform plan'
                   sh 'terraform apply -auto-approve'
+                }
                 sh 'export VM_IP=$(terraform output -raw VM_IP)'
-              }
               dir('./Ansible_session') {
                 sh '''
                 ansible-playbook -i $VM_IP --private-key $sshprivetkey -u tarekm_mvpengineer  -b install_nginx.yml
