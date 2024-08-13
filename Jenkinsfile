@@ -76,7 +76,7 @@ spec:
                   sh 'terraform plan'
                   sh 'terraform apply -auto-approve'
                 }
-                def VM_IP =sh (script:'terraform output -raw VM_IP)', returnStdout: true).trim()
+                def VM_IP =sh (script:'terraform output -raw VM_IP', returnStdout: true).trim()
                 env.VM_IP = VM_IP
               dir('./Ansible_session') {
                 sh '''
