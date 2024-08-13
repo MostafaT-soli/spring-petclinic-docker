@@ -76,11 +76,13 @@ spec:
                   sh 'terraform plan'
                   sh 'terraform apply -auto-approve'
                 }
-                def VM_IP =sh (script:'terraform output -raw VM_IP', returnStdout: true).trim()
+                def VM_IP = sh(script: 'terraform output -raw VM_IP', returnStdout: true)
+                echo "$VM_IP"
                 env.VM_IP = VM_IP
+              
               dir('./Ansible_session') {
                 sh '''
-                echo ${env.VM_IP}
+                echo "${env.VM_IP}"
                 ansible-playbook -i ${env.VM_IP} --private-key $sshprivetkey -u tarekm_mvpengineer  -b install_nginx.yml
                 '''
               }  
