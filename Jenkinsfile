@@ -85,6 +85,7 @@ spec:
                 sh '''
                 echo ${VM_IP} >> hosts.ini
                 cat $sshprivetkey > key1.pam
+                chmod 600 ./key1.pam
                 ansible-playbook -i hosts.ini --private-key ./key1.pam -u tarekm_mvpengineer  -b install_nginx.yml
                 '''
               }  
