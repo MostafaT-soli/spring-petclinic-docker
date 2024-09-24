@@ -86,6 +86,7 @@ spec:
                 echo ${VM_IP} >> hosts.ini
                 cat $sshprivetkey > key1.pam
                 chmod 600 ./key1.pam
+                sleep 9000
                 ansible-playbook -i hosts.ini --private-key ./key1.pam -u tarekm_mvpengineer  -b ANSIBLE_HOST_KEY_CHECKING=False install_nginx.yml
                 '''
               }  
