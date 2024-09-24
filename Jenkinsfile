@@ -30,7 +30,6 @@ spec:
         script {
            container('jnlp'){
             sh '''
-              sleep 9000
               git clone https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/MostafaT-soli/terraform_GKE.git
               git clone https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/MostafaT-soli/Ansible_session.git
               '''}
